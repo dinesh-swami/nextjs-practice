@@ -23,6 +23,5 @@ export async function fetchTodos(): Promise<Todo[]> {
     return [];
   }
   const json = await res.json();
-  console.log(json)
   return json.success ? json.data : [];
 }
