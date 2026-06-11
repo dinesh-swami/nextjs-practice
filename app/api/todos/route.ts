@@ -1,0 +1,57 @@
+import { NextResponse, NextRequest } from "next/server";
+import { prisma } from "../../../lib/db";
+import { Erica_One } from "next/font/google";
+
+export async function GET() {
+  try {
+    const todos = await prisma.todo.findMany();
+    return NextResponse.json(
+      { success: true, data: todos },
+      {
+        status: 200,
+      },
+    );
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { success: false, message: "failed to fetched todos" },
+      {
+        status: 400,
+      },
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const { title } = await request.json();
+    if (!title) {
+      return NextResponse.json(
+        {
+          success: true,
+          message: "title is required!",
+        },
+        { status: 400 },
+      );
+    }
+    const todo = await prisma.todo.create({
+      data: {
+        title: title,
+      },
+    });
+    return NextResponse.json(
+      { success: true, data: todo },
+      {
+        status: 201,
+      },
+    );
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { success: false, message: "failed to create todo" },
+      {
+        status: 401,
+      },
+    );
+  }
+}
