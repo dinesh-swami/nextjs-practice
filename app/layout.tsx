@@ -31,9 +31,7 @@ export default function RootLayout({
           alignItems: "center",
         }}
       >
-        <h1>Headers</h1>
         {children}
-        <h1>Footers</h1>
       </body>
     </html>
   );
