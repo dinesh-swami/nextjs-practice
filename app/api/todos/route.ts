@@ -1,6 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "../../../lib/db";
-import { Erica_One } from "next/font/google";
 
 export async function GET() {
   try {
@@ -55,3 +54,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+//
