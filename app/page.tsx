@@ -1,7 +1,11 @@
+import { Button } from "@/components/button";
 import Image from "next/image";
-import styles from "./page.module.css";
-
-export default function Home() {
+export default async function Home() {
+  const res = await fetch('https://api.freeapi.app/api/v1/public/randomusers?page=1&limit=10')
+  const data = await res.json()
+  for  (const i of data.data.data) {
+    console.log(i.email)
+  }
   return (
     <div>
       <Image src={"/jwt.png"} alt="jarvis" width={200} height={200} />
@@ -18,6 +22,7 @@ export default function Home() {
         reliable digital companion. Start exploring and experience the power of
         AI with Jarvis today.
       </p>
+      <Button/>
     </div>
-  );
+  ); 
 }
